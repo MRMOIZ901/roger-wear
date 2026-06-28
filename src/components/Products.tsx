@@ -8,15 +8,20 @@ import type { Product } from "@/lib/supabase";
 export default function Products({ products }: { products: Product[] }) {
   return (
     <section className="px-6 sm:px-12 py-28 max-w-6xl mx-auto">
-      <motion.h2
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.6 }}
-        className="text-3xl sm:text-5xl font-extrabold text-center mb-16"
+        className="text-center mb-16"
       >
-        New <span className="text-amber-700">Drops</span>
-      </motion.h2>
+        <Link
+          href="/new-drops"
+          className="text-3xl sm:text-5xl font-extrabold hover:opacity-80 transition-opacity inline-block"
+        >
+          New <span className="text-amber-700">Drops</span>
+        </Link>
+      </motion.div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((p, i) => (
@@ -57,7 +62,7 @@ export default function Products({ products }: { products: Product[] }) {
 
       <div className="text-center mt-12">
         <Link
-          href="/men"
+          href="/shop"
           className="inline-block border border-white/15 px-8 py-3 rounded-full hover:bg-white/10 transition-colors"
         >
           View All Shoes

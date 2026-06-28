@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const slides = [
   { src: "/products/artisan-edge-black/1.jpg", name: "Artisan Edge" },
@@ -66,12 +67,18 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.5 }}
         className="mt-10 flex gap-4"
       >
-        <button className="bg-amber-700 text-white font-semibold px-8 py-3 rounded-full hover:bg-amber-600 transition-transform hover:scale-105">
+        <Link
+          href="/shop"
+          className="bg-amber-700 text-white font-semibold px-8 py-3 rounded-full hover:bg-amber-600 transition-transform hover:scale-105"
+        >
           Shop Collection
-        </button>
-        <button className="border border-white/20 px-8 py-3 rounded-full hover:bg-white/10 transition-colors">
+        </Link>
+        <Link
+          href="/our-story"
+          className="border border-white/20 px-8 py-3 rounded-full hover:bg-white/10 transition-colors"
+        >
           Explore More
-        </button>
+        </Link>
       </motion.div>
 
       <div className="relative mt-16 w-[280px] sm:w-[420px] md:w-[480px] aspect-square">
