@@ -75,10 +75,16 @@ export default function AboutContent() {
             by thousands. We never lost the craft — every stitch, sole, and seam is
             still inspected by hand before it reaches your door.
           </p>
-          <p className="text-zinc-400 leading-relaxed">
+          <p className="text-zinc-400 leading-relaxed mb-6">
             Today, Roger Wear blends old-world leatherworking with modern comfort
             technology, so you get a shoe that ages like leather should: better with time.
           </p>
+          <a
+            href="/our-story"
+            className="inline-block text-amber-700 font-semibold hover:text-amber-600 transition-colors"
+          >
+            Read our full story →
+          </a>
         </motion.div>
 
         <motion.div
