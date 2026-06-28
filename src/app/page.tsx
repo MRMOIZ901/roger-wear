@@ -4,14 +4,19 @@ import Features from "@/components/Features";
 import Products from "@/components/Products";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import { getProducts } from "@/lib/supabase";
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
+  const products = await getProducts();
+
   return (
     <div className="flex flex-col flex-1">
       <Navbar />
       <Hero />
       <Features />
-      <Products />
+      <Products products={products.slice(0, 8)} />
       <CTA />
       <Footer />
     </div>

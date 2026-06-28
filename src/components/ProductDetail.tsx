@@ -4,11 +4,10 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minus, Plus, Truck, ShieldCheck, Check, ShoppingBag } from "lucide-react";
-import type { Product } from "@/lib/products";
-
-const sizes = [39, 40, 41, 42, 43, 44];
+import type { Product } from "@/lib/supabase";
 
 export default function ProductDetail({ product }: { product: Product }) {
+  const sizes = product.sizes;
   const [activeImage, setActiveImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);

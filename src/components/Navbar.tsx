@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { ShoppingBag, Menu } from "lucide-react";
 
 const navLinks = [
-  { label: "Men", href: "#" },
+  { label: "Men", href: "/men" },
   { label: "Women", href: "/women" },
-  { label: "New Drops", href: "#" },
+  { label: "New Drops", href: "/men" },
   { label: "Our Story", href: "/our-story" },
   { label: "About", href: "/about" },
 ];
@@ -33,10 +33,13 @@ export default function Navbar() {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="hidden sm:flex items-center gap-2 bg-amber-700 text-white font-semibold px-5 py-2 rounded-full hover:bg-amber-600 transition-colors">
+        <Link
+          href="/men"
+          className="hidden sm:flex items-center gap-2 bg-amber-700 text-white font-semibold px-5 py-2 rounded-full hover:bg-amber-600 transition-colors"
+        >
           <ShoppingBag size={16} />
           Shop Now
-        </button>
+        </Link>
         <Menu className="md:hidden" />
       </div>
     </motion.nav>

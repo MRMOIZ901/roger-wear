@@ -3,9 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { products } from "@/lib/products";
+import type { Product } from "@/lib/supabase";
 
-export default function Products() {
+export default function Products({ products }: { products: Product[] }) {
   return (
     <section className="px-6 sm:px-12 py-28 max-w-6xl mx-auto">
       <motion.h2
@@ -18,14 +18,14 @@ export default function Products() {
         New <span className="text-amber-700">Drops</span>
       </motion.h2>
 
-      <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((p, i) => (
           <motion.div
             key={p.slug}
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
+            transition={{ duration: 0.5, delay: i * 0.07 }}
             whileHover={{ y: -10, scale: 1.03 }}
           >
             <Link
@@ -53,6 +53,15 @@ export default function Products() {
             </Link>
           </motion.div>
         ))}
+      </div>
+
+      <div className="text-center mt-12">
+        <Link
+          href="/men"
+          className="inline-block border border-white/15 px-8 py-3 rounded-full hover:bg-white/10 transition-colors"
+        >
+          View All Shoes
+        </Link>
       </div>
     </section>
   );
