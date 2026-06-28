@@ -89,6 +89,7 @@ export default function Hero() {
               alt={slides[active].name}
               fill
               priority
+              sizes="(max-width: 640px) 280px, (max-width: 768px) 420px, 480px"
               className="object-cover"
             />
           </motion.div>
