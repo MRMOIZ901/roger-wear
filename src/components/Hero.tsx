@@ -1,8 +1,24 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+
+const slides = [
+  { src: "/products/artisan-edge.jpg", name: "Artisan Edge" },
+  { src: "/products/royal-crest.jpg", name: "Royal Crest" },
+];
 
 export default function Hero() {
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActive((i) => (i + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(id);
+  }, []);
+
   return (
     <section className="hero-gradient relative flex flex-col items-center justify-center text-center pt-40 pb-24 px-6 overflow-hidden min-h-screen">
       <motion.div
@@ -40,7 +56,7 @@ export default function Hero() {
         transition={{ duration: 0.7, delay: 0.35 }}
         className="mt-6 text-zinc-400 text-lg max-w-xl"
       >
-        Roger Wear blends premium comfort with bold street design.
+        Roger Wear blends premium comfort with bold leather craftsmanship.
         Built for movement, made to turn heads.
       </motion.p>
 
@@ -58,19 +74,39 @@ export default function Hero() {
         </button>
       </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 60, rotate: -6 }}
-        animate={{ opacity: 1, y: 0, rotate: -6 }}
-        transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
-        whileHover={{ rotate: 0, scale: 1.04 }}
-        className="mt-16 w-[280px] sm:w-[420px] md:w-[520px]"
-      >
-        <svg viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full drop-shadow-[0_30px_60px_rgba(253,224,71,0.25)]">
-          <path d="M40 320c20-30 60-50 100-55 30-4 55-20 70-45 10-17 25-30 45-35 25-6 50 2 65 22 10 14 25 22 42 24 35 4 70-6 95-30 12-12 30-15 45-7 18 10 25 32 16 50-10 20-30 33-52 38-40 9-70 38-105 55-45 22-95 30-145 25-55-6-110-20-160-30-10-2-18-10-16-22z" fill="#8a5a36"/>
-          <path d="M40 320c20-30 60-50 100-55 30-4 55-20 70-45 10-17 25-30 45-35 25-6 50 2 65 22 10 14 25 22 42 24 35 4 70-6 95-30 12-12 30-15 45-7 18 10 25 32 16 50-10 20-30 33-52 38-40 9-70 38-105 55-45 22-95 30-145 25-55-6-110-20-160-30-10-2-18-10-16-22z" stroke="#000" strokeWidth="6"/>
-          <ellipse cx="120" cy="330" rx="90" ry="18" fill="#111"/>
-        </svg>
-      </motion.div>
+      <div className="relative mt-16 w-[280px] sm:w-[420px] md:w-[480px] aspect-square">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={slides[active].src}
+            initial={{ opacity: 0, scale: 0.92, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.92, rotate: 4 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="absolute inset-0 rounded-3xl overflow-hidden bg-white/5 border border-white/10 drop-shadow-[0_30px_60px_rgba(138,90,54,0.25)]"
+          >
+            <Image
+              src={slides[active].src}
+              alt={slides[active].name}
+              fill
+              priority
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+          {slides.map((s, i) => (
+            <button
+              key={s.src}
+              onClick={() => setActive(i)}
+              aria-label={`Show ${s.name}`}
+              className={`h-2 rounded-full transition-all ${
+                i === active ? "w-8 bg-amber-700" : "w-2 bg-white/30"
+              }`}
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

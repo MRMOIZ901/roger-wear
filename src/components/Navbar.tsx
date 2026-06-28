@@ -6,7 +6,7 @@ import { ShoppingBag, Menu } from "lucide-react";
 
 const navLinks = [
   { label: "Men", href: "#" },
-  { label: "Women", href: "#" },
+  { label: "Women", href: "/women" },
   { label: "New Drops", href: "#" },
   { label: "Our Story", href: "/our-story" },
   { label: "About", href: "/about" },
