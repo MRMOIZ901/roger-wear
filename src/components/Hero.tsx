@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const slides = [
-  { src: "/products/artisan-edge.jpg", name: "Artisan Edge" },
-  { src: "/products/royal-crest.jpg", name: "Royal Crest" },
+  { src: "/products/artisan-edge-black/1.jpg", name: "Artisan Edge" },
+  { src: "/products/royal-crest-black/1.jpg", name: "Royal Crest" },
 ];
 
 export default function Hero() {
