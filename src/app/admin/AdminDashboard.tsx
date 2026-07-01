@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Package, Phone, MapPin, ChevronDown, ChevronUp,
-  LogOut, RefreshCw, CheckCircle, Truck, Clock, XCircle,
+  LogOut, RefreshCw, CheckCircle, Truck, Clock, XCircle, Zap,
 } from "lucide-react";
 
 type OrderItem = {
@@ -51,7 +51,17 @@ export default function AdminDashboard({ orders: initial }: { orders: Order[] })
   const [expanded, setExpanded] = useState<string | null>(null);
   const [updating, setUpdating] = useState<string | null>(null);
   const [filter, setFilter] = useState("all");
+  const [refreshing, setRefreshing] = useState(false);
+  const [refreshed, setRefreshed] = useState(false);
   const router = useRouter();
+
+  const handleRevalidate = async () => {
+    setRefreshing(true);
+    await fetch("/api/admin/revalidate", { method: "POST" });
+    setRefreshing(false);
+    setRefreshed(true);
+    setTimeout(() => setRefreshed(false), 3000);
+  };
 
   const handleStatusChange = async (id: string, status: string) => {
     setUpdating(id);
@@ -91,9 +101,28 @@ export default function AdminDashboard({ orders: initial }: { orders: Order[] })
           </div>
           <div className="flex items-center gap-3">
             <button
+              onClick={handleRevalidate}
+              disabled={refreshing}
+              title="Publish new products to website instantly"
+              className={`flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full border transition-colors ${
+                refreshed
+                  ? "bg-green-500/20 border-green-500/50 text-green-400"
+                  : "bg-amber-700/20 border-amber-700/50 text-amber-500 hover:bg-amber-700/30"
+              } disabled:opacity-50`}
+            >
+              {refreshing ? (
+                <RefreshCw size={14} className="animate-spin" />
+              ) : refreshed ? (
+                <CheckCircle size={14} />
+              ) : (
+                <Zap size={14} />
+              )}
+              {refreshing ? "Refreshing..." : refreshed ? "Site Updated!" : "Refresh Site"}
+            </button>
+            <button
               onClick={() => router.refresh()}
               className="text-zinc-400 hover:text-white transition-colors"
-              title="Refresh"
+              title="Reload orders"
             >
               <RefreshCw size={18} />
             </button>
