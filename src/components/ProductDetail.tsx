@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Minus, Plus, Truck, ShieldCheck, Check, ShoppingBag } from "lucide-react";
 import type { Product } from "@/lib/supabase";
+import { useCart } from "@/context/CartContext";
 
 export default function ProductDetail({ product }: { product: Product }) {
   const sizes = product.sizes;
@@ -12,9 +13,18 @@ export default function ProductDetail({ product }: { product: Product }) {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+  const { addItem } = useCart();
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
+    addItem({
+      slug: product.slug,
+      name: product.name,
+      price: product.price,
+      image: product.images[0],
+      size: selectedSize,
+      quantity,
+    });
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };

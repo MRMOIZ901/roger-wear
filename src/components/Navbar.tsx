@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Menu, X } from "lucide-react";
+import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { label: "Men", href: "/men" },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { totalItems, setCartOpen } = useCart();
 
   return (
     <>
@@ -45,6 +47,19 @@ export default function Navbar() {
               <ShoppingBag size={16} />
               Shop Now
             </Link>
+            {/* Cart icon */}
+            <button
+              onClick={() => setCartOpen(true)}
+              aria-label="Open cart"
+              className="relative text-white hover:text-amber-700 transition-colors"
+            >
+              <ShoppingBag size={22} />
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-amber-700 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                  {totalItems > 9 ? "9+" : totalItems}
+                </span>
+              )}
+            </button>
             <button
               onClick={() => setOpen((o) => !o)}
               aria-label="Toggle menu"
