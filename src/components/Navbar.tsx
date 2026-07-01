@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Menu, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
@@ -28,8 +29,15 @@ export default function Navbar() {
         className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/40 border-b border-white/10"
       >
         <div className="flex items-center justify-between px-6 sm:px-12 py-5">
-          <Link href="/" className="text-2xl font-extrabold tracking-tight" onClick={() => setOpen(false)}>
-            ROGER<span className="text-amber-700">WEAR</span>
+          <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
+            <Image
+              src="/logo-white.png"
+              alt="Roger Wear"
+              width={220}
+              height={66}
+              className="h-14 w-auto object-contain"
+              priority
+            />
           </Link>
 
           <div className="hidden md:flex items-center gap-10 text-sm font-medium text-zinc-300">
@@ -91,7 +99,10 @@ export default function Navbar() {
         transition={{ duration: 0.35, ease: "easeOut" }}
         className="md:hidden fixed top-0 right-0 h-full w-72 bg-zinc-950 border-l border-white/10 z-50"
       >
-        <div className="flex flex-col px-6 py-6 gap-5 text-zinc-300 font-medium mt-20">
+        <div className="px-6 pt-6 pb-2">
+          <Image src="/logo-white.png" alt="Roger Wear" width={140} height={42} className="h-9 w-auto object-contain" />
+        </div>
+        <div className="flex flex-col px-6 py-4 gap-5 text-zinc-300 font-medium">
           {navLinks.map((item) => (
             <Link
               key={item.label}

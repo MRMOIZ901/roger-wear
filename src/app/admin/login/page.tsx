@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
             <Lock size={28} className="text-amber-700" />
           </div>
           <h1 className="text-2xl font-extrabold">
-            ROGER<span className="text-amber-700">WEAR</span>
+            Roger<span className="text-amber-700">Wear</span>
           </h1>
           <p className="text-zinc-400 text-sm mt-1">Admin Access</p>
         </div>

@@ -1,12 +1,13 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
     <footer className="border-t border-white/10 px-6 sm:px-12 py-12 mt-auto">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
-        <span className="text-xl font-extrabold">
-          ROGER<span className="text-amber-700">WEAR</span>
-        </span>
+        <Link href="/">
+          <Image src="/logo-white.png" alt="Roger Wear" width={220} height={66} className="h-14 w-auto object-contain" />
+        </Link>
         <div className="flex gap-6 text-sm text-zinc-400">
           <Link href="/contact" className="hover:text-amber-700 transition-colors">Contact</Link>
           <Link href="/about" className="hover:text-amber-700 transition-colors">About</Link>
