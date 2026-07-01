@@ -12,6 +12,7 @@ const navLinks = [
   { label: "New Drops", href: "/new-drops" },
   { label: "Our Story", href: "/our-story" },
   { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
