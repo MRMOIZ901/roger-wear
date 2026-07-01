@@ -6,7 +6,6 @@ import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useCart } from "@/context/CartContext";
-import { supabase } from "@/lib/supabase";
 import { Truck, ShieldCheck, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -39,40 +38,30 @@ export default function CheckoutPage() {
     setError("");
 
     try {
-      // Insert order
-      const { data: order, error: orderErr } = await supabase
-        .from("orders")
-        .insert({
-          customer_name: form.name,
+      const res = await fetch("/api/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
           phone: form.phone,
           address: form.address,
           city: form.city,
           total: totalPrice,
-          status: "pending",
-        })
-        .select()
-        .single();
+          items: items.map((i) => ({
+            slug: i.slug,
+            name: i.name,
+            size: i.size,
+            quantity: i.quantity,
+            price: i.price,
+          })),
+        }),
+      });
 
-      if (orderErr) throw orderErr;
-
-      // Insert order items
-      const orderItems = items.map((item) => ({
-        order_id: order.id,
-        product_slug: item.slug,
-        product_name: item.name,
-        size: item.size,
-        quantity: item.quantity,
-        price: item.price,
-      }));
-
-      const { error: itemsErr } = await supabase
-        .from("order_items")
-        .insert(orderItems);
-
-      if (itemsErr) throw itemsErr;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
 
       clearCart();
-      router.push(`/order-confirmation?id=${order.id}`);
+      router.push(`/order-confirmation?id=${data.id}`);
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
