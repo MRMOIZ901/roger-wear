@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Products from "@/components/Products";
-import CTA from "@/components/CTA";
+import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
 import { getProducts } from "@/lib/supabase";
 
@@ -16,8 +16,8 @@ export default async function Home() {
       <Navbar />
       <Hero />
       <Features />
-      <Products products={products.slice(0, 8)} />
-      <CTA />
+      <Products products={products} />
+      <Testimonials />
       <Footer />
     </div>
   );
