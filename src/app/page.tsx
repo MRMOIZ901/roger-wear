@@ -6,7 +6,7 @@ import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import { getProducts } from "@/lib/supabase";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export default async function Home() {
   const products = await getProducts();

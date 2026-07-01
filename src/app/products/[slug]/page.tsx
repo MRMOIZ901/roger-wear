@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ProductDetail from "@/components/ProductDetail";
 import { getProduct } from "@/lib/supabase";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

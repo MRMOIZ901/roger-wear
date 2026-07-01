@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import CatalogGrid from "@/components/CatalogGrid";
 import { getProducts } from "@/lib/supabase";
 
-export const revalidate = 0;
+export const revalidate = 3600;
 
 export const metadata = {
   title: "Shop | Roger Wear",
