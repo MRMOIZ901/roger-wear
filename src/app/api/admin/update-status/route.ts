@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { supabaseAdmin } from "@/lib/supabase";
+import { getAdminClient } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
   const cookieStore = await cookies();
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   }
 
   const { id, status } = await req.json();
-  const { error } = await supabaseAdmin
+  const { error } = await getAdminClient()
     .from("orders")
     .update({ status })
     .eq("id", id);

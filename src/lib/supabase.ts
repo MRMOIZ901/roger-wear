@@ -6,10 +6,12 @@ export const supabase = createClient(
 );
 
 // Server-only admin client — bypasses RLS using the secret key
-export const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SECRET_KEY!
-);
+export function getAdminClient() {
+  return createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SECRET_KEY!
+  );
+}
 
 export type Product = {
   id: string;
