@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: "Roger Wear Orders <onboarding@resend.dev>",
-      to: "sharptricks901@gmail.com",
+      to: ["sharptricks901@gmail.com", "nexusfusionx@gmail.com"],
       subject: `🛍️ New Order — Rs. ${total.toLocaleString()} from ${name}`,
       text: `NEW ORDER RECEIVED\n\nOrder ID: ${order.id}\n\nCUSTOMER DETAILS\nName: ${name}\nPhone: ${phone}\nCity: ${city}\nAddress: ${address}\n\nITEMS ORDERED\n${itemsList}\n\nTOTAL: Rs. ${total.toLocaleString()}\n\nView all orders: https://roger-wear.vercel.app/admin`,
     });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -54,6 +54,16 @@ export default function AdminDashboard({ orders: initial }: { orders: Order[] })
   const [refreshing, setRefreshing] = useState(false);
   const [refreshed, setRefreshed] = useState(false);
   const router = useRouter();
+
+  // Auto-refresh orders every 30 seconds
+  const refreshOrders = useCallback(() => {
+    router.refresh();
+  }, [router]);
+
+  useEffect(() => {
+    const id = setInterval(refreshOrders, 30000);
+    return () => clearInterval(id);
+  }, [refreshOrders]);
 
   const handleRevalidate = async () => {
     setRefreshing(true);
