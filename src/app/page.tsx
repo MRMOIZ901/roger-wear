@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import Products from "@/components/Products";
 import Testimonials from "@/components/Testimonials";
+import Quality from "@/components/Quality";
 import Footer from "@/components/Footer";
 import { getProducts } from "@/lib/supabase";
 
@@ -18,6 +19,7 @@ export default async function Home() {
       <Features />
       <Products products={products} />
       <Testimonials />
+      <Quality />
       <Footer />
     </div>
   );
